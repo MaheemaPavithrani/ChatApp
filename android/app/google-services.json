@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "241964965759",
+    "firebase_url": "https://mychat-78f51.firebaseio.com",
+    "project_id": "mychat-78f51",
+    "storage_bucket": "mychat-78f51.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:241964965759:android:c2948c09cf66b86ef1444a",
+        "android_client_info": {
+          "package_name": "com.maheema"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "241964965759-c0s04lqggilckc9m922s2jiaastghmsq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDwLj8OfuhKPJGX87jPg55Nobbmt-JoWnA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "241964965759-c0s04lqggilckc9m922s2jiaastghmsq.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
