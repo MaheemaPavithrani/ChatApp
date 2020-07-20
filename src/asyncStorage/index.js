@@ -1,6 +1,6 @@
 import AsyncStorage from '@react-native-community/async-storage';
 
-export const keys = {
+const keys = {
   uuid: 'uuid',
 
 }
@@ -42,4 +42,4 @@ const clearAsyncStorage = async()=>{
   }
 };
 
-export { setAsyncStorage, getAsyncStorage, clearAsyncStorage };
+export { setAsyncStorage, getAsyncStorage, clearAsyncStorage, keys };

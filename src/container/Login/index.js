@@ -3,7 +3,7 @@ import {SafeAreaView, Text, View} from 'react-native';
 import {globalStyle, color} from '../../utility';
 import {Logo, InputField, RoundCornerButton} from '../../component';
 import { Store } from '../../context/store';
-import { LOADING_START } from '../../context/actions/type';
+import { LOADING_START, LOADING_STOP } from '../../context/actions/type';
 
 const Login = ({navigation}) => {
 
@@ -29,7 +29,7 @@ const Login = ({navigation}) => {
       });
       setTimeout(()=>{
         dispatchLoaderAction({
-          type: LOADING_START,
+          type: LOADING_STOP,
         });
 
       }, 2000);
