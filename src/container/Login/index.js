@@ -4,6 +4,10 @@ import {globalStyle, color} from '../../utility';
 import {Logo, InputField, RoundCornerButton} from '../../component';
 import { Store } from '../../context/store';
 import { LOADING_START, LOADING_STOP } from '../../context/actions/type';
+import { LoginRequest } from '../../network';
+import { setUniqueValue } from '../../utility/constants';
+import { setAsyncStorage, keys } from '../../asyncStorage';
+
 
 const Login = ({navigation}) => {
 
@@ -27,12 +31,21 @@ const Login = ({navigation}) => {
       dispatchLoaderAction({
         type: LOADING_START,
       });
-      setTimeout(()=>{
+      LoginRequest(email,password)
+      .then((res)=>{
+        setAsyncStorage(keys.uuid, res.user.uid);
+        setUniqueValue(res.user.uid);
         dispatchLoaderAction({
           type: LOADING_STOP,
         });
-
-      }, 2000);
+        navigation.replace("Dashboard");
+      })
+      .catch((err)=>{
+        dispatchLoaderAction({
+          type: LOADING_STOP,
+        });
+        alert(err); 
+      })
     }
   };
 

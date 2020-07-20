@@ -49,7 +49,7 @@ const SignUp = ({navigation}) => {
           dispatchLoaderAction({
             type: LOADING_STOP,
           });
-          navigation.navigate('Dashboard');
+          navigation.replace('Dashboard');
         })
         .catch((err)=>{
           dispatchLoaderAction({
