@@ -2,6 +2,8 @@ import React, { useLayoutEffect } from 'react';
 import {View, Text, Alert} from 'react-native';
 import {color} from '../../utility';
 import SimpleLineIcon from 'react-native-vector-icons/SimpleLineIcons';
+import { LogOutUser } from '../../network';
+import { clearAsyncStorage } from '../../asyncStorage';
 
 const Dashboard = ({navigation}) => {
   useLayoutEffect(() => {
@@ -19,7 +21,7 @@ const Dashboard = ({navigation}) => {
           [
             {
               text: 'Yes',
-              onPress:()=>alert('logged out')
+              onPress:()=> logout(),
             },
             {
               text: 'No'
@@ -32,6 +34,22 @@ const Dashboard = ({navigation}) => {
       ),
     });
   }, [navigation]);
+
+  //* log out
+
+  const logout = () => {
+    LogOutUser()
+    .then(()=>{
+      clearAsyncStorage()
+      .then(()=>{
+        navigation.replace('Login');
+      })
+      .catch((err)=>alert(err));
+    })
+    .catch((err)=>alert(err));
+  };
+
+
   return(
     <View>
       <Text>Dashboard</Text>
