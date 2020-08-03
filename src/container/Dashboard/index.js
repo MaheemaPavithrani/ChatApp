@@ -171,6 +171,27 @@ const Dashboard = ({navigation}) => {
     }
   };
 
+  // * On name tap
+
+  const nameTap = (profileImg, name, guestUserId) => {
+    if(!profileImg){
+      navigation.navigate('Chat',{
+        name,
+        imgText : name.charAt(0),
+        guestUserId,
+        currentUserId : uuid
+      });
+    }
+    else{
+      navigation.navigate('Chat',{
+        name,
+        img : profileImg,
+        guestUserId,
+        currentUserId : uuid
+      });
+    }
+  };
+
   // * get opacity
 
   const getOpacity = () => {
@@ -218,7 +239,7 @@ const Dashboard = ({navigation}) => {
         name = {item.name}
         img = {item.profileImg}
         onImgTap={()=> imgTap(item.profileImg,item.name)}
-
+        onNameTap={()=> nameTap(item.profileImg,item.name,item.id)}
         />
       )}
       />
