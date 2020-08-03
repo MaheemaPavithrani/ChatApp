@@ -2,26 +2,29 @@ import React, { useLayoutEffect, useContext, useState, useEffect } from 'react';
 import {Alert, SafeAreaView, FlatList} from 'react-native';
 import {color, globalStyle} from '../../utility';
 import SimpleLineIcon from 'react-native-vector-icons/SimpleLineIcons';
-import { LogOutUser } from '../../network';
+import { LogOutUser,UpdateUser } from '../../network';
 import { clearAsyncStorage } from '../../asyncStorage';
 import firebase from '../../firebase/config';
 import { Store } from '../../context/store';
 import { LOADING_START, LOADING_STOP } from '../../context/actions/type';
-import { uuid } from '../../utility/constants';
-import { Profile, ShowUsers } from '../../component';
+import { uuid, smallDeviceHeight } from '../../utility/constants';
+import { Profile, ShowUsers, StickyHeader } from '../../component';
 import ImagePicker from 'react-native-image-picker';
+import { deviceHeight } from "../../utility/styleHelper/appStyle";
+
 
 const Dashboard = ({navigation}) => {
   const globalState = useContext(Store);
   const { dispatchLoaderAction } = globalState;
+  const [getScrollPosition,setScrollPosition] = useState(0);
 
-  const [usrDetail,setUserDetail] = useState({
+  const [userDetail, setUserDetail] = useState({
     id:'',
     name:'',
     profileImg:''
   });
 
-  const {name, profileImg} = setUserDetail;
+  const {name, profileImg} = userDetail;
   const [allUsers, setAllUsers] = useState([]); 
 
   useLayoutEffect(() => {
@@ -97,6 +100,46 @@ const Dashboard = ({navigation}) => {
     }
   },[]);
 
+  const selectPhotoTapped = () =>{  
+    const option = {
+      storageOptions: {
+        skipBackup: true
+      }
+    };
+    ImagePicker.showImagePicker(option,(response)=>{
+      console.log("Response = ", response);
+      if(response.didCancel){
+        console.log('User cancel image picker')
+      }
+      else if(response.error){
+        console.log('Image picker error',response.error)
+      }
+      else{
+        //Base 64
+        let source = 'data: image/jpeg;base64,'+response.data;
+        dispatchLoaderAction({
+          type: LOADING_START
+        });
+        UpdateUser(uuid, source)
+          .then(() => {
+            setUserDetail({
+              ...userDetail,
+              profileImg: source,
+            });
+            dispatchLoaderAction({
+              type: LOADING_STOP,
+            });
+          })
+          .catch(() => {
+            alert(err);
+            dispatchLoaderAction({
+              type: LOADING_STOP,
+            });
+          });
+      }
+    });
+  };
+
   //* log out
 
   const logout = () => {
@@ -111,23 +154,65 @@ const Dashboard = ({navigation}) => {
     .catch((err)=>alert(err));
   };
 
+  //* On image tap
+
+  const imgTap = (profileImg, name) => {
+    if(!profileImg){
+      navigation.navigate('ShowFullImg',{
+        name,
+        imgText:name.charAt(0), 
+      });
+    }
+    else{
+      navigation.navigate('ShowFullImg',{
+        name,
+        img:profileImg,
+      });
+    }
+  };
+
+  // * get opacity
+
+  const getOpacity = () => {
+    if(deviceHeight<smallDeviceHeight){
+      return deviceHeight/4;
+    }
+    else{
+      return deviceHeight/6;
+    }
+  };
+
 
   return(
     <SafeAreaView style={[globalStyle.flex1,{backgroundColor:color.BLACK}]}>
+      {
+        getScrollPosition > getOpacity() && (
+          <StickyHeader
+          name={name}
+          img={profileImg}
+          onImgTap={()=> imgTap(profileImg,name)}
+          />
+        )
+      }
       <FlatList
       alwaysBounceVertical = {false}
       data = {allUsers}
       keyExtractor = {(_,index)=>index.toString()}
+      onScroll={(event)=> setScrollPosition(event.nativeEvent.contentOffset.y)}
       ListHeaderComponent={
         <Profile
         img = {profileImg}
         name = {name}
+        onEditImgTap = {()=>selectPhotoTapped()}
+        onImgTap={()=> imgTap(profileImg,name)}
         />
       }
       renderItem = {({item})=>(
         <ShowUsers
         name = {item.name}
         img = {item.profileImg}
+        onImgTap={()=> imgTap(item.profileImg,item.name)}
+
         />
       )}
       />
