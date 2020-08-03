@@ -1,5 +1,5 @@
 import React, { useLayoutEffect, useContext, useState, useEffect } from 'react';
-import {Alert, SafeAreaView, FlatList} from 'react-native';
+import {Alert, SafeAreaView, FlatList, View} from 'react-native';
 import {color, globalStyle} from '../../utility';
 import SimpleLineIcon from 'react-native-vector-icons/SimpleLineIcons';
 import { LogOutUser,UpdateUser } from '../../network';
@@ -200,12 +200,18 @@ const Dashboard = ({navigation}) => {
       keyExtractor = {(_,index)=>index.toString()}
       onScroll={(event)=> setScrollPosition(event.nativeEvent.contentOffset.y)}
       ListHeaderComponent={
+        <View
+        style={{
+          opacity : getScrollPosition < getOpacity() ? (getOpacity()-getScrollPosition) / 100 : 0 ,
+        }}
+        >
         <Profile
         img = {profileImg}
         name = {name}
         onEditImgTap = {()=>selectPhotoTapped()}
         onImgTap={()=> imgTap(profileImg,name)}
         />
+        </View>
       }
       renderItem = {({item})=>(
         <ShowUsers
