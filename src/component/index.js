@@ -6,5 +6,6 @@ import Profile from './profile';
 import ShowUsers from './showUsers'
 import StickyHeader from './stickyHeader';
 import ChatBox from './chatBox';
+import FieldInput from './fieldInput';
 
-export {RoundCornerButton, InputField, Logo, Loader, Profile, ShowUsers, StickyHeader, ChatBox};
+export {RoundCornerButton, InputField, Logo, Loader, Profile, ShowUsers, StickyHeader, ChatBox, FieldInput};
