@@ -22,12 +22,12 @@ export const DANGER = "rgb(255,0,0)";
  */
 export const GREY = "rgb(219, 221, 222)";
 export const WHITE = "rgb(255, 255, 255)";
-export const BLACK = "rgb(0, 0, 0)";
+export const BLACK = "rgb(0, 25, 51)";
 export const SEMI_TRANSPARENT = "rgba(0,0,0,0.5)";
 export const RED = "rgba(255, 0, 0, 1)";
 export const SILVER = "rgb(192,192,192)";
 
-export const DARK_GRAY = "rgb(46, 46, 46)";
+export const DARK_GRAY = "rgb(0, 0, 52)";
 
 export const DARK_LIME_GREEN = "rgba(0,128,0,0.2)";
 

@@ -43,7 +43,7 @@ const Chat = ({ route, navigation }) => {
           dataSnapshot.forEach((child)=>{
             msgs.push({
               sendBy: child.val().messege.sender,
-              recievedBy:child.val().messege.reciever,
+              recievedBy:child.val().messege.reciever,  
               msg:child.val().messege.msg,
               img:child.val().messege.img,
             });
@@ -105,7 +105,7 @@ const Chat = ({ route, navigation }) => {
   };
 
   const handleOnChange = (text) => {
-    setMsgValue(text);
+    setMsgValue(text); 
   };
 
   // * On image tap

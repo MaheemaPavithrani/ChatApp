@@ -7,7 +7,7 @@ export const senderMsg = async (msgValue,currentUserId,guestUserId,img) => {
     .ref('messeges/'+currentUserId)
     .child(guestUserId)
     .push({
-      messeges:{
+      messege:{
         sender:currentUserId,
         receiver:guestUserId,
         msg:msgValue,
@@ -30,7 +30,7 @@ export const recieverMsg = async (msgValue,currentUserId,guestUserId,img) => {
     .ref('messeges/'+guestUserId)
     .child(currentUserId)
     .push({
-      messeges:{
+      messege:{
         sender:currentUserId,
         receiver:guestUserId,
         msg:msgValue,

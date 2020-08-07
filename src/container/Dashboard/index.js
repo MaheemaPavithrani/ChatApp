@@ -169,7 +169,7 @@ const Dashboard = ({navigation}) => {
         img:profileImg,
       });
     }
-  };
+  }; 
 
   // * On name tap
 
@@ -179,7 +179,7 @@ const Dashboard = ({navigation}) => {
         name,
         imgText : name.charAt(0),
         guestUserId,
-        currentUserId : uuid
+        currentUserId : uuid,
       });
     }
     else{
@@ -187,7 +187,7 @@ const Dashboard = ({navigation}) => {
         name,
         img : profileImg,
         guestUserId,
-        currentUserId : uuid
+        currentUserId : uuid,
       });
     }
   };

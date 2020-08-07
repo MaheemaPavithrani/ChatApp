@@ -41,13 +41,14 @@ function NavContainer(){
           component={Dashboard} 
           options={{headerLeft: null}}/>
           <Stack.Screen 
+          name="Chat" 
+          component={Chat} 
+          options={{headerBackTitle: null}}/>
+          <Stack.Screen 
           name="ShowFullImg" 
           component={ShowFullImg} 
           options={{headerBackTitle: null}}/> 
-          <Stack.Screen 
-          name="Chat" 
-          component={Chat} 
-          options={{headerBackTitle: null}}/>  
+            
       </Stack.Navigator>
     </NavigationContainer>
   );
