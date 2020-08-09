@@ -24,7 +24,7 @@ const Splash = ({navigation}) => {
         console.log(err);
         navigation.replace('Login');
       });
-    },3000);
+    },6000);
     return () => clearTimeout(redirect);
   },[navigation])
   return(
@@ -33,6 +33,17 @@ const Splash = ({navigation}) => {
     }>
 
       <Logo />
+      <Text style={{
+            fontSize: 24,
+            padding:30,
+            fontWeight: 'bold',
+            color: color.LIGHT_GREEN,
+          }}> Pavithrani D.V.M.</Text>
+      <Text style={{
+            fontSize: 24,
+            fontWeight: 'bold',
+            color: color.LIGHT_GREEN,
+          }}> 17001242 </Text>
     </View>
 
   )
